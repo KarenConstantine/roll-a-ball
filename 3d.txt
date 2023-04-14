@@ -1,0 +1,93 @@
+СКРИПТ 1
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    public float speed;
+
+    private Rigidbody rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void FixedUpdate()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+        rb.AddForce(movement * speed);
+    }
+}
+
+
+СКРИПТ 2
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Rotator : MonoBehaviour
+{
+    void Update()
+    {
+        transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
+    }
+}
+
+
+
+СКРИПТ 3
+
+if (other.gameObject.CompareTag("Coin"))
+{
+    other.gameObject.SetActive(false);
+}
+
+
+СКРИПТ 4
+
+if (other.gameObject.CompareTag("Coin"))
+{
+    other.gameObject.SetActive(false);
+    AudioSource audio = GetComponent<AudioSource>();
+    audio.Play();
+}
+
+
+СКРИПТ 5
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class LevelManager : MonoBehaviour
+{
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+}
+
+
+
+СКРИПТ 6
+
+public int coinCount;
+public int coinTotal;
+public GameObject levelManager;
+
+
+СКРИПТ 7
+
+coinCount++;
+if (coinCount >= coinTotal)
+{
+    levelManager.GetComponent<LevelManager>().LoadNextLevel();
+}
+
